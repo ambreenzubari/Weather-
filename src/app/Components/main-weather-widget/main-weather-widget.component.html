@@ -1,0 +1,39 @@
+<div class="container">
+   <form class="input-container" (ngSubmit)="getWeatherData()">
+       <select id="cityDropdown" [(ngModel)]="selectedCity">
+           <option *ngFor="let city of cities" [value]="city">{{ city }}</option>
+           <option value="custom">Enter a custom city</option>
+       </select>
+       <input *ngIf="selectedCity === 'custom'" id="input" type="text" placeholder="Enter city name" [(ngModel)]="country">
+       <button class="btn" type="submit">Submit</button>
+   </form>
+
+   <div *ngIf="loading" class="loader"></div>
+
+   <div *ngIf="errorMessage" class="error-message">{{ errorMessage }}</div>
+
+   <div *ngIf="weatherData && !loading" class="weather-main">
+       <div class="weather-temp">
+           {{weatherData.tempCelsius}}°C
+       </div>
+
+       <div class="weather-details">
+           <div class="weather-row">
+               <span class="label">Today:</span>
+               <span class="value">{{weatherData.temp_min}}°/{{weatherData.temp_max}}°</span>
+           </div>
+           <div class="weather-row">
+               <span class="label">Feels Like:</span>
+               <span class="value">{{weatherData.tempFeelsLike}}°</span>
+           </div>
+           <div class="weather-row">
+               <span class="label">Location:</span>
+               <span class="value">{{weatherData.name}}, {{weatherData.sys.country}}</span>
+           </div>
+           <div class="weather-row">
+               <span class="label">Humidity:</span>
+               <span class="value">{{weatherData.main.humidity}}%</span>
+           </div>
+       </div>
+   </div>
+</div>
