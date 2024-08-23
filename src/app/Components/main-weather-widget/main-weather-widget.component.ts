@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from 'src/environments/environment';
 
 @Component({
   selector: 'app-main-weather-widget',
@@ -29,8 +30,7 @@ export class MainWeatherWidgetComponent implements OnInit {
     const city = this.selectedCity === 'custom' ? this.country : this.selectedCity;
 
     if (city && city.length > 0) {
-      const apiKey = '31374a4de9427421b9eabcd9d554c7a4';
-      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}`;
+      const url = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${environment.weatherAPI}`;
       fetch(url)
         .then(response => {
           if (!response.ok) {
